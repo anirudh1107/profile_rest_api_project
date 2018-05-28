@@ -65,3 +65,14 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
         """django uses to convert object to string"""
 
         return self.email
+
+class ProfileFeedItem(models.Model):
+    """profile status update"""
+    user_profile = models.ForeignKey('UserProfile',on_delete = models.CASCATE)
+    status_text = models.CharField(max_length=225)
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        """return the model as status"""
+
+        return self.status_text
